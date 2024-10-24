@@ -4,6 +4,7 @@ import Browse from "./Browse";
 
 
 
+
 const Body = () => {
 
     const appRouter = createBrowserRouter([
@@ -15,6 +16,7 @@ const Body = () => {
             path: "/browse",
             element: <Browse/>
         },
+        
     ])
 
     return (
