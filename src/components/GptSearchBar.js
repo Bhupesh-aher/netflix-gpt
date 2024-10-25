@@ -3,7 +3,6 @@ import lang from "../utils/languageConstants";
 import { useRef } from "react";
 import { chatSession } from "../utils/AIModel";
 import { API_OPTIONS } from "../utils/constants";
-import { json } from "react-router-dom";
 import { addGptMovieResult } from "../utils/gptSlice";
 
 const GptSearchBar = () => {
@@ -32,28 +31,22 @@ const GptSearchBar = () => {
         // }
         
         console.log(result?.response?.text());
+        
         const gptMoviesText = result?.response?.text();
         
-        // const cleanedMoviesText = gptMoviesText.replace(/"/g, '').replace(/\s*,\s*/g, ', ');
         
         const gptMovies = JSON.parse(`[${gptMoviesText}]`);
-        console.log(gptMovies);
+        console.log("Parsed Movies Array:", gptMovies);
+
         if (!Array.isArray(gptMovies) || gptMovies.length === 0) {
             console.error("gptMovies is not a valid array");
             return; // Exit if the array is not valid
         }
 
-        const gpt = gptMovies[0]; // Assuming the first element is the array of titles
-        console.log("First Element (gpt):", gpt);
-
-        // Ensure that gpt is indeed an array before calling map
-        if (!Array.isArray(gpt)) {
-            console.error("gpt is not an array:", gpt);
-            return; // Exit if gpt is not an array
-        }
+       
         
-        // const gpt = gptMovies;
-        // console.log(gpt);
+        const gpt = gptMovies;
+        console.log(gpt);
         
         
         
@@ -73,8 +66,8 @@ const GptSearchBar = () => {
     }
 
     return (
-         <div className="pt-[10%] flex justify-center">
-            <form className="w-1/2 bg-black grid grid-cols-12" onSubmit={(e) => e.preventDefault()}>
+         <div className="pt-[35%] md:pt-[10%] flex justify-center">
+            <form className="w-full md:w-1/2 bg-black grid grid-cols-12" onSubmit={(e) => e.preventDefault()}>
                 <input 
                 ref={searchText}
                 className="p-4 m-4 col-span-9" type="text" 
