@@ -20,7 +20,7 @@ const GptSearchBar = () => {
 
     const handleGptSearchClick = async() => {
         const text = searchText.current.value;
-        console.log(text);
+        // console.log(text);
         // make an API call to GPT API and get Movie suggestions
         const textQuery = "Act as a movie Recommendation system and suggest some movies for the query : " + text + "only give me names of 5 movies comma separated" 
 
@@ -30,34 +30,34 @@ const GptSearchBar = () => {
         //     // TODO: write error handling
         // }
         
-        console.log(result?.response?.text());
+        // console.log(result?.response?.text());
         
         const gptMoviesText = result?.response?.text();
         
         
         const gptMovies = JSON.parse(`[${gptMoviesText}]`);
-        console.log("Parsed Movies Array:", gptMovies);
+        // console.log("Parsed Movies Array:", gptMovies);
 
         if (!Array.isArray(gptMovies) || gptMovies.length === 0) {
-            console.error("gptMovies is not a valid array");
+            // console.error("gptMovies is not a valid array");
             return; // Exit if the array is not valid
         }
 
        
         
         const gpt = gptMovies;
-        console.log(gpt);
+        // console.log(gpt);
         
         
         
         // for each movie i will search TMDB API
         const promiseArray = gpt.map((movie) => searchMovieTMDB(movie))
-        console.log(promiseArray);
+        // console.log(promiseArray);
         
         // [Promise, Promise, Promise, Promise, Promise]
 
         const tmdbResults = await Promise.all(promiseArray);
-        console.log(tmdbResults);
+        // console.log(tmdbResults);
  
         dispatch(addGptMovieResult({movieNames: gpt, movieResults: tmdbResults}));
         
