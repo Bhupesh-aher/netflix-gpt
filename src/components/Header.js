@@ -2,7 +2,7 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { addUser, removeUser } from "../utils/userSlice";
 import { LOGO, SUPPORTED_LANGUAGES, USER_ICON } from "../utils/constants";
 import { toggleGptSearchView } from "../utils/gptSlice"
@@ -11,10 +11,12 @@ import { changeLanguage } from "../utils/configSlice";
 
 const Header = () => {
 
+
     const navigate = useNavigate();
     const user = useSelector(store => store.user);
     const dispatch = useDispatch();
     const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
+    const [show, setShow] = useState(false);
     
 
     const handleSignOut = () => {
@@ -53,6 +55,10 @@ const Header = () => {
       dispatch(changeLanguage(e.target.value))
       
     }
+
+    const handleShow = () => {
+      setShow(!show)
+    }
  
     return (
         <div className="absolute w-screen px-8 py-2 bg-gradient-to-b from-black z-10 flex flex-col md:flex-row justify-between">
@@ -71,10 +77,21 @@ const Header = () => {
               >
                 {showGptSearch ? "HomePage" : "GPT Search"}
                 </button>
+
+                <div className="relative">
                 <img
-                className="hidden md:block w-12 h-12"
-                alt="user" src={USER_ICON}/>
-                <button onClick={handleSignOut} className="font-bold text-white">(Sign Out)</button>
+                className="hidden md:block w-12 h-12 cursor-pointer"
+                alt="user" src={USER_ICON}
+                onClick={handleShow}/>
+
+                {show && (
+                  <div className="absolute top-full right-0 mt-2 w-40 bg-white p-4 rounded shadow-lg text-center">
+                 <h4 className="font-bold text-gray-800">Welcome! {user.displayName}</h4>
+                <button onClick={handleSignOut} className="mt-2 text-red-500 font-bold hover:underline">Sign Out</button>
+                </div>
+              )}
+                </div>
+
              </div>)}
         </div>
     )
@@ -82,3 +99,4 @@ const Header = () => {
 
 
 export default Header;
+

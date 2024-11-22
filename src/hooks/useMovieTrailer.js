@@ -28,8 +28,11 @@ const useMovieTrailer = (movieId) => {
     }
 
     useEffect(() => {
-      !trailerVideo && getMovieVideo();
-    }, [])
+      // !trailerVideo && getMovieVideo();
+      if (!trailerVideo || trailerVideo.id !== movieId) {
+        getMovieVideo();
+    }
+    }, [ movieId])
 
 
 }
