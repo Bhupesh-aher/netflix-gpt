@@ -41,6 +41,11 @@
 
 
 
+## Screenshots
+![Image 1](public/assets/netflix%20gpt%20trailer.png)
+![Image 1](public/assets/netflix%20gpt%20movies.png)
+![Image 1](public/assets/netflix%20gpt%20search.png)
+
 ## Technologies
 
 - **Frontend**:
