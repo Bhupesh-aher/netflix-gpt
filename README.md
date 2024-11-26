@@ -81,12 +81,3 @@
 
 
 
-## Screenshots
-
-Here are some screenshots of the app:
-
-*The homepage with a stunning background trailer and categorized movie sections.*
-
-*The powerful GPT search bar where users can input movie genres to get recommendations.*
-
-*Movie details page with cover images, descriptions, and movie trailers.*
